@@ -11,24 +11,34 @@ Then we can use CREATE AGGREGATE to build a new aggregate
 
 You can build this extension by using the following commands
 
+```
 sudo make USE_PGXS=1 PG_CONFIG=path_to_pg_binaries/pg_config install
+```
 
-Then run the following command path_to_psql/psql -U postgres -d db_name -c "CREATE EXTENSION min_max"
+Then run the following command 
+
+```
+path_to_psql/psql -U postgres -d db_name -c "CREATE EXTENSION min_max"
+```
 
 # GUC variables
 
 min_max.separator - use it to change the final output. The example is provided below
 
-test=# SELECT min_to_max(val) FROM (VALUES(5),(3),(6),(7),(9),(10),(7)) t(val);
+```
+SELECT min_to_max(val) FROM (VALUES(5),(3),(6),(7),(9),(10),(7)) t(val);
  min_to_max
 ------------
  3 -> 10
 (1 row)
+```
 
-test=# set min_max.separator to ' : ';
-SET
-UFOS_TSE=# SELECT min_to_max(val) FROM (VALUES(5),(3),(6),(7),(9),(10),(7)) t(val);
+```
+set min_max.separator to ' : ';
+
+SELECT min_to_max(val) FROM (VALUES(5),(3),(6),(7),(9),(10),(7)) t(val);
  min_to_max
 ------------
  3 : 10
 (1 row)
+```
